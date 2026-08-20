@@ -66,7 +66,10 @@ nav button:hover { background: var(--gray); }
 nav button.active { color: var(--blue); border-bottom-color: var(--blue); }
 /* Rechte Nav-Gruppe (Verwaltung + Info). Das margin haengt am Wrapper, damit die
    Gruppe rechts bleibt, auch wenn einzelne Buttons fuer Nicht-Admins fehlen. */
-nav .nav-right { margin-left: auto; display: flex; gap: inherit; }
+/* flex-wrap, weil die Gruppe sonst als ein Stueck ueber den rechten Rand
+   hinauslaeuft: bei 375px bleiben neben dem linken Reiter nur ~319px, und
+   vier Reiter brauchen mehr. Ohne den Umbruch ist der letzte nicht antippbar. */
+nav .nav-right { margin-left: auto; display: flex; flex-wrap: wrap; gap: inherit; }
 
 main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 60px; }
 .tab-section { display: none; }
