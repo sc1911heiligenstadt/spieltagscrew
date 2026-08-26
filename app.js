@@ -161,6 +161,16 @@ function zeigeFehler(e) {
 }
 
 function zeigeLoginGate(text) {
+  // ⚠️ Verstecken ist nicht Räumen. Diese Funktion wird auch MITTEN IM BETRIEB
+  // gerufen — ein Speichern scheitert, weil die Sitzung abgelaufen ist. Dann
+  // steht bereits alles auf dem Bildschirm, und display:none lässt es nur
+  // unsichtbar im DOM zurück: Namen, Adressen, Beträge, offene Formularfelder.
+  //
+  // Wegwerfen ist hier gefahrlos: der Weg zurück in die App führt ausschließlich
+  // über ein Neuladen der Seite (startApp() wird nur aus init() gerufen, nirgends
+  // sonst). Wer sich neu anmeldet, bekommt die Seite ohnehin frisch aufgebaut.
+  const __huelle = document.getElementById("app-shell");
+  if (__huelle) __huelle.innerHTML = "";
   document.getElementById("app-shell").style.display = "none";
   document.getElementById("connect-screen").style.display = "flex";
   if (text) document.getElementById("cloud-error").textContent = text;
