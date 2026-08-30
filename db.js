@@ -40,13 +40,13 @@ function getSessionToken() {
 
 async function gatewayRequest(payload) {
   const token = getSessionToken();
-  if (!token) throw new NotLoggedInError();
+  if (!token) { if (typeof raeumeBeiSitzungsverlust === "function") raeumeBeiSitzungsverlust(); throw new NotLoggedInError(); }
   const resp = await fetch(GATEWAY_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
     body: JSON.stringify(payload)
   });
-  if (resp.status === 401) throw new NotLoggedInError("Sitzung abgelaufen");
+  if (resp.status === 401) { if (typeof raeumeBeiSitzungsverlust === "function") raeumeBeiSitzungsverlust(); throw new NotLoggedInError("Sitzung abgelaufen"); }
   // 409 trägt hier eine echte Begründung ("Der Posten ist bereits voll besetzt",
   // "Du stehst an diesem Spieltag schon beim Grill") und ist NICHT der
   // Schreibkonflikt anderer Apps — deshalb wird die Nachricht durchgereicht

@@ -41,6 +41,18 @@ const GITTER_AB_PX = 768;
 
 const APP_CHANGELOG = [
   {
+    version: "1.3",
+    groups: [
+      {
+        title: "Beim Sitzungsende wird der Bildschirm geräumt",
+        items: [
+          "Beim Sitzungsende wurde die Seite bereits geleert. Der Posten-Dialog, der Spieltag-Dialog und der Aushang zum Drucken stehen aber daneben und blieben mit den Helfernamen stehen. Jetzt werden sie mitgeleert.",
+          "Der Hinweis erscheint außerdem an jeder Stelle, an der die Anmeldung wegfällt — vorher nur bei einem Teil der Wege."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.2",
     groups: [
       {
