@@ -4,6 +4,16 @@ Wer übernimmt bei den Heimspielen der 1. Mannschaft welchen Posten: Kassenhäus
 
 **➡️ [Spieltagscrew öffnen](https://sc1911heiligenstadt.github.io/spieltagscrew/)**
 
+## Was drin ist
+
+| Reiter | Wofür |
+|---|---|
+| **Spieltage** | Die kommenden Heimspiele mit allen Posten — hier trägt man sich ein und aus, und hier wird der Aushang gedruckt |
+| **Vergangene** | Die gespielten Heimspieltage; sie bleiben dauerhaft stehen und lassen sich nicht mehr besetzen |
+| **Jobs** | Der Job-Katalog: Name, Beschreibung, Personenzahl und Zeitfenster je Posten |
+| **Verwaltung** | Erinnerungen einstellen und auslösen, Spieltage anlegen und ändern, Einsätze je Person |
+| **Info** | Was die App tut, die Änderungen und der Datenschutz-Hinweis |
+
 ## Wie es gedacht ist
 
 1. Die Verwaltung pflegt einmal den **Job-Katalog** — Name, Personenzahl und Zeitfenster je Posten.
@@ -13,13 +23,15 @@ Wer übernimmt bei den Heimspielen der 1. Mannschaft welchen Posten: Kassenhäus
 
 ## Das Zeitfenster
 
-Die Zeiten stehen **relativ zum Anstoß**: `−90` heißt 90 Minuten vor dem Anpfiff, `15` heißt 15 Minuten danach. Die App rechnet daraus die echte Uhrzeit — beim Spiel um 15:00 Uhr steht am Kassenhäuschen „13:30–15:15 Uhr", beim Spiel um 13:00 Uhr automatisch „11:30–13:15 Uhr". Einmal gepflegt, nie wieder anfassen.
+Die Zeiten stehen **relativ zum Anstoß**: `−90` heißt 90 Minuten vor dem Anpfiff, `15` heißt 15 Minuten danach. Die App rechnet daraus die echte Uhrzeit — beim Spiel um 15:00 Uhr steht am Kassenhäuschen „13:30–15:15 Uhr“, beim Spiel um 13:00 Uhr automatisch „11:30–13:15 Uhr“. Einmal gepflegt, nie wieder anfassen.
 
 ## Zugang
 
 Die Anmeldung läuft über die [Tools-Übersicht](https://sc1911heiligenstadt.github.io/ToolsUebersicht/) — dort einmal anmelden, danach ist dieses Werkzeug offen.
 
-Die Rechte gelten in drei Stufen: **Sehen** (alle Spieltage, Posten und Namen ansehen), **Bearbeiten** (sich selbst ein- und austragen) und **Administrieren** (Spieltage und Katalog pflegen, andere eintragen, Auswertung). Wer welche Stufe hat, legt die Tools-Übersicht fest.
+Die Rechte gelten in drei Stufen: **Sehen** (alle Spieltage, Posten und Namen ansehen), **Bearbeiten** (sich selbst ein- und austragen) und **Administrieren** (Spieltage und Katalog pflegen, andere eintragen, Erinnerungen einstellen und auslösen, Auswertung). Wer welche Stufe hat, legt die Tools-Übersicht fest. Der Reiter *Info* ist für alle sichtbar.
+
+Wie oft jemand geholfen hat, sieht ausschließlich die Verwaltung — eine offene Rangliste würde aus Freiwilligkeit einen Wettbewerb machen.
 
 ## Lokal starten
 

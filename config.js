@@ -39,55 +39,8 @@ const DEFAULT_EINSTELLUNGEN = { erinnerungTage: 7, terminerinnerung: true, lagem
 // die Darstellung; beide müssen zusammenpassen.
 const GITTER_AB_PX = 768;
 
+
 const APP_CHANGELOG = [
-  {
-    version: "1.4",
-    groups: [
-      {
-        title: "Der Reiter „Info“ erklärt jetzt, was die App wirklich tut",
-        items: [
-          "Dort stand bisher ein einzelner Satz. Jetzt steht da, wofür die einzelnen Reiter da sind, was die App mit den Eingaben macht und wo etwas anderes hingehört.",
-          "Am Funktionsumfang ändert sich nichts — nur an der Beschreibung."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.3",
-    groups: [
-      {
-        title: "Beim Sitzungsende wird der Bildschirm geräumt",
-        items: [
-          "Beim Sitzungsende wurde die Seite bereits geleert. Der Posten-Dialog, der Spieltag-Dialog und der Aushang zum Drucken stehen aber daneben und blieben mit den Helfernamen stehen. Jetzt werden sie mitgeleert.",
-          "Der Hinweis erscheint außerdem an jeder Stelle, an der die Anmeldung wegfällt — vorher nur bei einem Teil der Wege."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.2",
-    groups: [
-      {
-        title: "Beim Abmelden bleibt nichts stehen",
-        items: [
-          "Läuft die Anmeldung ab, während die App offen ist — zum Beispiel weil ein Speichern nach längerer Pause fehlschlägt —, erscheint wie bisher der Hinweis „bitte neu anmelden“.",
-          "Neu ist: der Bildschirm dahinter wird jetzt auch geleert. Vorher wurde er nur unsichtbar gemacht, und alles Angezeigte blieb im Browser stehen — sichtbar für jeden, der sich an denselben Rechner setzt und nachschaut.",
-          "Für dich ändert sich nichts: der Weg zurück war schon immer ein Neuladen der Seite."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Am Handy",
-        items: [
-          "Bisher brach die Reiterleiste selbst um, die rechte Reiter-Gruppe darin aber nicht: Sie rutschte als ein Stück in die zweite Zeile und lief dort weiter über den rechten Rand hinaus. Jetzt bricht auch sie um, sobald sie zu breit wird. Zu sehen ist das nur, wenn genug Reiter nebeneinanderstehen — bis dahin sieht alles aus wie bisher."
-        ]
-      }
-    ]
-  },
   {
     version: "1.0",
     groups: [
@@ -95,7 +48,7 @@ const APP_CHANGELOG = [
         title: "Heimspieltage pflegen",
         items: [
           "Jeder Heimspieltag wird mit Datum, Anstoßzeit, Gegner und Wettbewerb angelegt. Eine Notiz nimmt auf, was sonst per Zuruf untergeht — etwa dass an diesem Tag zwei Mannschaften nacheinander spielen.",
-          "Vergangene Spieltage bleiben dauerhaft stehen. Sie sind die Grundlage der Auswertung und werden nie automatisch gelöscht.",
+          "Vergangene Spieltage bleiben in einem eigenen Reiter dauerhaft stehen. Sie sind die Grundlage der Auswertung und werden nie automatisch gelöscht.",
           "Angelegte Spieltage sind sofort offen: wer weit vorausplant, kann sich im Juli für den Oktober eintragen."
         ]
       },
@@ -123,7 +76,7 @@ const APP_CHANGELOG = [
           "Sieben Tage vor dem Spieltag meldet sich die App bei allen, die helfen dürfen und an diesem Tag noch keinen Posten haben — aber nur, wenn tatsächlich noch etwas frei ist. Wer schon eingetragen ist, bekommt diese Nachricht nicht.",
           "Am Vortag bekommt jeder Eingetragene seine eigene Erinnerung, mit Posten und Uhrzeit.",
           "Die Verwaltung bekommt zur selben Frist eine Lagemeldung: was ist noch frei — und wenn alles besetzt ist, ausdrücklich auch das.",
-          "Die Frist ist einstellbar, und jede Erinnerung lässt sich zusätzlich von Hand auslösen.",
+          "Die Frist ist einstellbar, jede der beiden Nachrichten lässt sich einzeln abschalten, und der Aufruf an die offenen Posten lässt sich zusätzlich von Hand auslösen.",
           "Eingeschaltet wird das in der Tools-Übersicht unter „Mein Konto“. Wer den Schalter ausschaltet, bekommt keine dieser Nachrichten."
         ]
       },
@@ -132,7 +85,8 @@ const APP_CHANGELOG = [
         items: [
           "Am Rechner zeigt ein Gitter alle kommenden Spieltage nebeneinander — dort ist auf einen Blick zu sehen, welcher Posten über mehrere Spieltage hinweg leer bleibt.",
           "Am Handy wird daraus eine Liste aus Spieltags-Karten mit Posten untereinander, damit sich niemand quer über eine Tabelle schieben muss.",
-          "Zu jedem Spieltag lässt sich ein Aushang drucken: alle Posten mit Namen und ausgerechneter Uhrzeit, für das Kassenhäuschen oder das Schwarze Brett."
+          "Die Reiterleiste bricht am Handy um, statt seitlich aus dem Bild zu laufen.",
+          "Zu jedem Spieltag lässt sich ein Aushang drucken: alle Posten mit Namen und ausgerechneter Uhrzeit, freie Plätze ausdrücklich als frei — für das Kassenhäuschen oder das Schwarze Brett."
         ]
       },
       {
@@ -140,9 +94,16 @@ const APP_CHANGELOG = [
         items: [
           "Sehen: alle Spieltage, alle Posten und wer eingetragen ist.",
           "Bearbeiten: sich selbst ein- und austragen.",
-          "Administrieren: Spieltage und Job-Katalog pflegen, andere eintragen, Erinnerungen auslösen und die Auswertung einsehen.",
+          "Administrieren: Spieltage und Job-Katalog pflegen, andere eintragen, Erinnerungen einstellen und auslösen und die Auswertung einsehen.",
           "Wie oft jemand geholfen hat, sieht ausschließlich die Verwaltung. Eine offene Rangliste würde aus Freiwilligkeit einen Wettbewerb machen.",
           "Der Reiter „Info“ ist für alle sichtbar."
+        ]
+      },
+      {
+        title: "Daten & Speicherung",
+        items: [
+          "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht — ein eigenes Passwort braucht es nicht.",
+          "Fällt die Anmeldung weg, während die App offen ist, wird der Bildschirm geräumt — die Seite selbst und auch der Posten-Dialog, der Spieltag-Dialog und der Aushang zum Drucken daneben. Es bleibt kein Helfername im Browser zurück, und jeder Weg führt auf den Hinweis, sich neu anzumelden."
         ]
       }
     ]
