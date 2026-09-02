@@ -1,0 +1,8 @@
+# Lokales Claude-Projektgedaechtnis, nicht Teil des oeffentlichen Repos
+CLAUDE.md
+
+# Lokale Daten-Dumps und Sicherungen (Konsolen-Datenreparatur, Seeds) --
+# enthalten echte Vereinsdaten und gehoeren nie in das oeffentliche Repo
+seed*.json
+*.seed.json
+*.backup.*

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🦺 Spieltagscrew</title>
+<meta name="theme-color" content="#1a56a0" />
+<link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+
+  <div class="connect-screen" id="connect-screen">
+    <div class="card">
+      <h2>🦺 Spieltagscrew</h2>
+      <p id="connect-message">Bitte über die Tools-Übersicht anmelden, um die Heimspieltage zu sehen.</p>
+      <div class="btn-row">
+        <a class="btn" href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/">Zur Tools-Übersicht</a>
+      </div>
+      <p class="muted" id="cloud-error" style="margin-top:14px;"></p>
+    </div>
+  </div>
+
+  <div id="app-shell" style="display:none;">
+    <header>
+      <h1>🦺 Spieltagscrew</h1>
+      <a href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/" class="back-to-dashboard">← Zurück zum Dashboard</a>
+      <div class="header-right">
+        <button class="btn small admin-only hidden" id="btn-spieltag-neu">+ Spieltag anlegen</button>
+        <span class="header-status" id="save-status"></span>
+        <span class="header-user" id="header-user"></span>
+        <img class="header-logo" src="https://sc1911heiligenstadt.github.io/logo.svg" alt="1. SC 1911 Heiligenstadt e.V." />
+      </div>
+    </header>
+
+    <nav>
+      <button data-tab="spieltage" class="active">Spieltage</button>
+      <button data-tab="vergangene">Vergangene</button>
+      <div class="nav-right">
+        <button data-tab="jobs" class="admin-only hidden">Jobs</button>
+        <button data-tab="verwaltung" class="admin-only hidden">Verwaltung</button>
+        <button data-tab="info">Info</button>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- ---------- Kommende Spieltage ---------- -->
+      <section class="tab-section active" id="tab-spieltage">
+        <div class="summary-cards" id="summary-cards"></div>
+
+        <div class="card">
+          <h2>Kommende Heimspiele</h2>
+          <p class="muted" style="margin-bottom:14px;" id="spieltage-hinweis"></p>
+
+          <div class="gitter-wrap" id="gitter-wrap">
+            <table class="gitter" id="gitter"></table>
+          </div>
+          <div class="karten-wrap" id="karten-wrap"></div>
+
+          <div class="empty-state hidden" id="spieltage-empty">Es ist noch kein Heimspieltag angelegt.</div>
+        </div>
+      </section>
+
+      <!-- ---------- Vergangene Spieltage ---------- -->
+      <section class="tab-section" id="tab-vergangene">
+        <div class="card">
+          <h2>Vergangene Heimspiele</h2>
+          <p class="muted" style="margin-bottom:14px;">Wer wann geholfen hat. Vergangene Spieltage bleiben dauerhaft stehen und lassen sich nicht mehr verändern.</p>
+          <div class="karten-wrap" id="vergangene-liste" style="display:flex;"></div>
+          <div class="empty-state hidden" id="vergangene-empty">Es liegt noch kein Heimspiel zurück.</div>
+        </div>
+      </section>
+
+      <!-- ---------- Job-Katalog (Administrieren) ---------- -->
+      <section class="tab-section" id="tab-jobs">
+        <div class="card">
+          <h2>Job-Katalog</h2>
+          <p class="muted" style="margin-bottom:14px;">Die Vorlage für neue Spieltage. Beim Anlegen eines Spieltags werden diese Posten als eigene Kopie übernommen — eine spätere Änderung hier fasst bestehende Spieltage <strong>nicht</strong> an.</p>
+          <div class="hinweis">Das Zeitfenster wird relativ zum Anstoß angegeben: <strong>−90</strong> heißt 90 Minuten vor dem Anpfiff, <strong>15</strong> heißt 15 Minuten danach. So stimmen die Uhrzeiten auch bei einem Spiel um 13:00 statt um 15:00 Uhr.</div>
+          <div class="job-row-header">
+            <span>Posten</span><span>Beschreibung</span><span>Personen</span><span>von (Min.)</span><span>bis (Min.)</span><span></span>
+          </div>
+          <div class="job-liste" id="katalog-liste"></div>
+          <div class="btn-row" style="justify-content:flex-start;margin-top:12px;">
+            <button class="btn small secondary" id="btn-katalog-neu">+ Posten hinzufügen</button>
+            <button class="btn small secondary hidden" id="btn-katalog-vorschlag">Vorschlag übernehmen</button>
+            <button class="btn small success" id="btn-katalog-speichern">Katalog speichern</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- Verwaltung (Administrieren) ---------- -->
+      <section class="tab-section" id="tab-verwaltung">
+        <div class="card">
+          <h2>Erinnerungen</h2>
+          <p class="muted" style="margin-bottom:14px;">Der nächtliche Lauf verschickt die Nachrichten von selbst. Von Hand ausgelöst prüft derselbe Weg sofort nach, wen er gerade erreichen würde.</p>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Aufruf wie viele Tage vorher?</label>
+              <input type="number" id="ein-tage" min="1" max="60" step="1" />
+            </div>
+          </div>
+          <div class="checkbox-row" style="margin-bottom:14px;">
+            <label><input type="checkbox" id="ein-termin" /> Terminerinnerung am Vortag an alle, die einen Posten haben</label>
+            <label><input type="checkbox" id="ein-lage" /> Lagemeldung an die Verwaltung — auch als Entwarnung, wenn alles besetzt ist</label>
+          </div>
+          <div class="btn-row" style="justify-content:flex-start;">
+            <button class="btn small success" id="btn-einstellungen-speichern">Einstellungen speichern</button>
+            <button class="btn small secondary" id="btn-erinnern">Jetzt an offene Posten erinnern</button>
+          </div>
+          <p class="muted" id="lauf-status" style="margin-top:12px;"></p>
+        </div>
+
+        <div class="card">
+          <h2>Spieltage verwalten</h2>
+          <p class="muted" style="margin-bottom:14px;">Anlegen, Kopfdaten ändern, Posten dieses einen Spieltags anpassen oder den Spieltag löschen.</p>
+          <div class="job-liste" id="spieltag-admin-liste"></div>
+          <div class="empty-state hidden" id="spieltag-admin-empty">Es ist noch kein Spieltag angelegt.</div>
+        </div>
+
+        <div class="card">
+          <h2>Einsätze je Person</h2>
+          <p class="muted" style="margin-bottom:14px;">Gerechnet aus den tatsächlichen Einträgen — kommende und vergangene Spieltage getrennt. Diese Aufstellung sieht ausschließlich die Verwaltung.</p>
+          <div class="table-scroll">
+            <table class="data-table" id="auswertung-tabelle"></table>
+          </div>
+          <div class="empty-state hidden" id="auswertung-empty">Es hat sich noch niemand eingetragen.</div>
+        </div>
+      </section>
+
+      <!-- ---------- Info ---------- -->
+      <section class="tab-section" id="tab-info">
+        <div class="card">
+          <h2>Über die Spieltagscrew <span class="version-badge" id="version-badge"></span></h2>
+          <p class="muted">
+            Wer übernimmt bei den Heimspielen der 1. Mannschaft welchen Posten. Die Jobs werden
+            einmal als Katalog gepflegt, jeder Spieltag bekommt seine eigene Kopie davon, und wer helfen
+            kann, trägt sich selbst ein. Die Zeiten stehen relativ zum Anstoß — „−90“ heißt 90 Minuten
+            vor dem Anpfiff —, die echte Uhrzeit rechnet die App daraus. Sieben Tage vorher meldet sie
+            sich bei allen, die noch keinen Posten haben; am Vortag bekommt jeder Eingetragene seine
+            eigene Erinnerung mit Posten und Uhrzeit.
+          </p>
+          <div class="form-grid" id="meta-view"></div>
+          <p class="muted" id="info-user" style="margin-top:10px;"></p>
+        </div>
+        <div class="card">
+          <h2>Änderungen</h2>
+          <div id="changelog-list"></div>
+        </div>
+
+        <div class="card" id="ds-info-karte">
+          <h2>Datenschutz</h2>
+          <p>Dieses Werkzeug gehört zu den internen Anwendungen des
+          1. SC 1911 Heiligenstadt. Die hier erfassten Daten werden
+          ausschließlich für die Vereinsarbeit verwendet und liegen auf Servern
+          in Deutschland, die ein Auftragsverarbeiter für den Verein betreibt.
+          Eine Weitergabe an Dritte findet nur statt, soweit sie für den
+          jeweiligen Zweck erforderlich oder gesetzlich vorgeschrieben ist.</p>
+          <p>Verantwortlich ist der 1. SC 1911 Heiligenstadt, Leineberg 2,
+          37308 Heilbad Heiligenstadt, Telefon 03606 612206,
+          <a href="mailto:info@sc1911-heiligenstadt.de">info@sc1911-heiligenstadt.de</a>.
+          Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+          Datenübertragbarkeit und Widerspruch lassen sich unter dieser
+          Anschrift geltend machen. Beschwerden nimmt der Thüringer
+          Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+          entgegen.</p>
+          <p><a href="https://www.sc1911-heiligenstadt.de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung des Vereins</a>
+          &middot;
+          <a href="https://www.sc1911-heiligenstadt.de/impressum-2/" target="_blank" rel="noopener">Impressum</a></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ---------- Aushang zum Drucken ---------- -->
+  <div id="print-area"><div id="print-content"></div></div>
+
+  <!-- ---------- Posten im Detail: ein- und austragen ---------- -->
+  <div class="modal-overlay hidden" id="posten-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="posten-titel">Posten</h2>
+        <button class="modal-close" id="posten-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body" id="posten-body"></div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="footer-rechts">
+          <span class="btn-row" id="posten-aktionen"></span>
+          <button class="btn secondary" id="posten-schliessen">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Spieltag anlegen / ändern (Administrieren) ---------- -->
+  <div class="modal-overlay hidden" id="spieltag-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="spieltag-modal-titel">Neuer Spieltag</h2>
+        <button class="modal-close" id="spieltag-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="spieltag-form">
+          <div class="form-grid">
+            <div class="form-field"><label>Datum *</label><input type="date" id="sf-datum" /></div>
+            <div class="form-field"><label>Anstoß *</label><input type="time" id="sf-anstoss" /></div>
+            <div class="form-field wide"><label>Gegner *</label><input type="text" id="sf-gegner" maxlength="120" placeholder="z. B. SV Eichsfeld" /></div>
+            <div class="form-field"><label>Wettbewerb</label><select id="sf-wettbewerb"></select></div>
+            <div class="form-field"><label>Mannschaft</label><select id="sf-mannschaft"></select></div>
+            <div class="form-field wide"><label>Notiz</label><textarea id="sf-notiz" rows="2" maxlength="500" placeholder="Was an diesem Tag zusätzlich zu beachten ist…"></textarea></div>
+          </div>
+
+          <div class="form-field wide" id="sf-jobs-block">
+            <label>Posten an diesem Spieltag</label>
+            <p class="muted" style="margin-bottom:8px;" id="sf-jobs-hinweis"></p>
+            <div class="job-liste" id="sf-jobs"></div>
+            <div class="btn-row" style="justify-content:flex-start;margin-top:8px;">
+              <button type="button" class="btn tiny secondary" id="btn-sf-job-neu">+ Posten hinzufügen</button>
+              <button type="button" class="btn tiny secondary" id="btn-sf-katalog-nachziehen">Katalog erneut übernehmen</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn danger hidden" id="sf-loeschen">Löschen</button>
+        <div class="footer-rechts">
+          <button class="btn secondary" id="sf-abbrechen">Abbrechen</button>
+          <button class="btn success" id="sf-speichern">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js?v=1.0"></script>
+  <script src="db.js?v=1.0"></script>
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>
