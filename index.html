@@ -96,7 +96,7 @@
           <p class="muted" style="margin-bottom:14px;">Der nächtliche Lauf verschickt die Nachrichten von selbst. Von Hand ausgelöst prüft derselbe Weg sofort nach, wen er gerade erreichen würde.</p>
           <div class="form-grid">
             <div class="form-field">
-              <label>Aufruf wie viele Tage vorher?</label>
+              <label for="ein-tage">Aufruf wie viele Tage vorher?</label>
               <input type="number" id="ein-tage" min="1" max="60" step="1" />
             </div>
           </div>
@@ -204,12 +204,12 @@
       <div class="modal-body">
         <form id="spieltag-form">
           <div class="form-grid">
-            <div class="form-field"><label>Datum *</label><input type="date" id="sf-datum" /></div>
-            <div class="form-field"><label>Anstoß *</label><input type="time" id="sf-anstoss" /></div>
-            <div class="form-field wide"><label>Gegner *</label><input type="text" id="sf-gegner" maxlength="120" placeholder="z. B. SV Eichsfeld" /></div>
-            <div class="form-field"><label>Wettbewerb</label><select id="sf-wettbewerb"></select></div>
-            <div class="form-field"><label>Mannschaft</label><select id="sf-mannschaft"></select></div>
-            <div class="form-field wide"><label>Notiz</label><textarea id="sf-notiz" rows="2" maxlength="500" placeholder="Was an diesem Tag zusätzlich zu beachten ist…"></textarea></div>
+            <div class="form-field"><label for="sf-datum">Datum *</label><input type="date" id="sf-datum" /></div>
+            <div class="form-field"><label for="sf-anstoss">Anstoß *</label><input type="time" id="sf-anstoss" /></div>
+            <div class="form-field wide"><label for="sf-gegner">Gegner *</label><input type="text" id="sf-gegner" maxlength="120" placeholder="z. B. SV Eichsfeld" /></div>
+            <div class="form-field"><label for="sf-wettbewerb">Wettbewerb</label><select id="sf-wettbewerb"></select></div>
+            <div class="form-field"><label for="sf-mannschaft">Mannschaft</label><select id="sf-mannschaft"></select></div>
+            <div class="form-field wide"><label for="sf-notiz">Notiz</label><textarea id="sf-notiz" rows="2" maxlength="500" placeholder="Was an diesem Tag zusätzlich zu beachten ist…"></textarea></div>
           </div>
 
           <div class="form-field wide" id="sf-jobs-block">
