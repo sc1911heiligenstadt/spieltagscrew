@@ -42,6 +42,18 @@ const GITTER_AB_PX = 768;
 
 const APP_CHANGELOG = [
   {
+    version: "1.1",
+    groups: [
+      {
+        title: "„Jetzt erinnern“ sagt jetzt, wie viele wirklich erreicht wurden",
+        items: [
+          "Die Meldung nach dem Knopf zählte die Angeschriebenen, nicht die Erreichten. Da stand „14 Nachricht(en) verschickt“, auch wenn kein einziges Handy angegangen ist — wer kein Gerät angemeldet oder den Schalter „Spieltagscrew“ ausgeschaltet hat, fiel erst danach still heraus.",
+          "Jetzt steht dort „N von M erreicht“, und darunter, wie viele keine Benachrichtigungen eingeschaltet haben."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.0",
     groups: [
       {

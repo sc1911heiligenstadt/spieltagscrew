@@ -809,9 +809,20 @@ async function handleErinnern() {
     renderEinstellungen();
     // Ausdrücklich benennen, was passiert ist: eine stille Erfolgsmeldung würde
     // auch dann gut aussehen, wenn niemand erreichbar war.
+    // ⚠️ `gesendet` waren bis zum 05.09.2026 die ANGESCHRIEBENEN, nicht die
+    // Erreichten — wer kein Gerät angemeldet oder den Schalter aus hatte, fiel
+    // erst später im Worker heraus, und das meldet nichts zurück. Es stand also
+    // „14 Nachricht(en) verschickt“, auch wenn null Handys angingen. Seitdem
+    // liefert der Worker die echte Reichweite plus `angeschrieben` und
+    // `ohneAbo`. Ein älterer Worker liefert die beiden neuen Felder nicht —
+    // dann steht wie bisher nur die eine Zahl da.
     const teile = [];
     if (typeof body.spieltage === "number") teile.push(`${body.spieltage} Spieltag(e) mit freien Posten`);
-    if (typeof body.gesendet === "number") teile.push(`${body.gesendet} Nachricht(en) verschickt`);
+    if (typeof body.gesendet === "number") {
+      teile.push(typeof body.angeschrieben === "number"
+        ? `${body.gesendet} von ${body.angeschrieben} erreicht`
+        : `${body.gesendet} Nachricht(en) verschickt`);
+    }
     if (typeof body.ohneAbo === "number" && body.ohneAbo > 0) teile.push(`${body.ohneAbo} ohne eingeschaltete Benachrichtigung`);
     alert(teile.length ? teile.join(" · ") : "Es gab gerade nichts zu melden.");
     setStatusText("Erledigt");
