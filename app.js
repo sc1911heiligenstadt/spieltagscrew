@@ -514,7 +514,32 @@ function renderInfo() {
   document.getElementById("info-user").textContent = currentUser
     ? `Angemeldet als ${nameVon(currentUser.username)} — ${canAdmin() ? "Administrieren" : canEdit() ? "Bearbeiten" : "Sehen"}.`
     : "";
-  document.getElementById("changelog-list").innerHTML = APP_CHANGELOG.map((v) => `
+  renderFunktionen();
+  renderChangelog();
+}
+
+// Was die App kann -- die Karte "Funktionen" im Info-Reiter. Nutzt dieselben
+// CSS-Klassen wie die uebrigen Vereins-Tools (.changelog-group, .cg-title,
+// .cg-items), damit die Karte ueberall gleich aussieht.
+function renderFunktionen() {
+  const el = document.getElementById("funktionen-list");
+  if (!el) return;
+  el.innerHTML = APP_FUNKTIONEN.map((g) => `
+    <div class="changelog-group">
+      <div class="cg-title">${escapeHtml(g.title)}</div>
+      <ul class="cg-items">${g.items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
+    </div>`).join("");
+}
+
+// Die Aenderungsliste steht seit 07.09.2026 NICHT mehr im Info-Reiter: dort
+// sollen nur die Funktionen der App stehen. APP_CHANGELOG bleibt in config.js
+// gepflegt und wird weiter geschrieben -- es ist die Quelle fuer die Anleitung
+// und fuer die Neuigkeiten-Meldungen. Diese Funktion steigt darum still aus,
+// wenn es das Ziel nicht gibt, statt beim Seitenstart abzubrechen.
+function renderChangelog() {
+  const el = document.getElementById("changelog-list");
+  if (!el) return;
+  el.innerHTML = APP_CHANGELOG.map((v) => `
     <div class="changelog-version">
       <h3>Version ${escapeHtml(v.version)}</h3>
       ${v.groups.map((g) => `
@@ -987,8 +1012,6 @@ function setupListeners() {
 // ---------- Start ----------
 
 async function init() {
-  document.getElementById("version-badge").textContent = "v" + APP_VERSION;
-
   // Ein einziger Aufruf für Rechte UND Daten: `spieltagscrew-load` liefert `me`
   // mit. Deshalb ist der Login-Gate hier an denselben Aufruf gehängt, statt
   // vorher noch einmal separat zu fragen.

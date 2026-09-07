@@ -365,3 +365,11 @@ body.printing-report #print-area { display: block; padding: 20px; }
   nav { padding: 8px 12px 0; }
   .posten-zeile { align-items: flex-start; }
 }
+
+/* Karte "Funktionen" im Info-Reiter. Die Klassen .changelog-group/.cg-title/
+   .cg-items sind aus ToolsUebersicht/style.css uebernommen, damit die Karte in
+   allen Vereins-Tools gleich aussieht. */
+#funktionen-list { display: flex; flex-direction: column; gap: 18px; font-size: 13px; }
+.changelog-group { display: flex; flex-direction: column; gap: 4px; }
+.changelog-group .cg-title { font-weight: 700; font-size: 14px; color: var(--blue); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 2px; }
+.changelog-group .cg-items { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 3px; color: var(--text); }

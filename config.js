@@ -40,7 +40,94 @@ const DEFAULT_EINSTELLUNGEN = { erinnerungTage: 7, terminerinnerung: true, lagem
 const GITTER_AB_PX = 768;
 
 
+// Was die Spieltagscrew kann -- steht im Info-Reiter als Karte "Funktionen".
+// WICHTIG: Das ist NICHT der Changelog. Hier steht der ZUSTAND ("ein voller
+// Posten nimmt niemanden mehr an"), dort die Aenderung. Wer eine Funktion
+// umbaut oder abschaltet, zieht diesen Text mit -- und ebenso
+// E:\SC1911-Tools-Anleitung.txt, wo dasselbe ausfuehrlich steht.
+const APP_FUNKTIONEN = [
+  {
+    title: "Wofür die Spieltagscrew da ist",
+    items: [
+      "Sie verteilt die Posten bei den Heimspielen der 1. Mannschaft: Kassenhäuschen, Ordnungsdienst, Grill und Imbiss, Getränkeausschank, Stadionsprecher, Aufbau und Abbau.",
+      "Wer helfen kann, trägt sich selbst ein — es braucht keine Rundmail und keine Liste am Schwarzen Brett."
+    ]
+  },
+  {
+    title: "Heimspieltage pflegen",
+    items: [
+      "Jeder Heimspieltag wird mit Datum, Anstoßzeit, Gegner und Wettbewerb angelegt. Eine Notiz nimmt auf, was sonst per Zuruf untergeht — etwa dass an diesem Tag zwei Mannschaften nacheinander spielen.",
+      "Ein angelegter Spieltag ist sofort offen: Wer weit vorausplant, kann sich im Juli für den Oktober eintragen.",
+      "Vergangene Spieltage stehen in einem eigenen Reiter dauerhaft und werden nie automatisch gelöscht — sie sind die Grundlage der Auswertung."
+    ]
+  },
+  {
+    title: "Posten und Zeitfenster",
+    items: [
+      "Der Job-Katalog wird einmal gepflegt: Name, kurze Beschreibung, benötigte Personenzahl und Zeitfenster.",
+      "Das Zeitfenster steht relativ zum Anstoß — etwa 90 Minuten vor bis 15 Minuten nach dem Anpfiff. Die echte Uhrzeit rechnet die App daraus: Bei einem Spiel um 13:00 Uhr steht dort eine andere als bei einem um 15:00 Uhr.",
+      "Beim Anlegen eines Spieltags werden die Posten als eigene Kopie hineingeschrieben. Beim Derby lassen sich dort vier Ordner statt zwei eintragen, ohne den Katalog zu ändern.",
+      "Umgekehrt fasst eine spätere Änderung am Katalog bestehende Spieltage nicht an."
+    ]
+  },
+  {
+    title: "Sich eintragen",
+    items: [
+      "Ein Klick auf einen freien Platz trägt dich ein, ein zweiter wieder aus. Wer sich austrägt, muss niemanden fragen — die Verantwortlichen bekommen aber eine Nachricht, damit der leere Posten nicht unbemerkt bleibt.",
+      "Ein voller Posten nimmt niemanden mehr an, und je Spieltag steht jede Person auf höchstens einem Posten. Beides prüft der Server, nicht nur die Oberfläche.",
+      "Zusagen, die per Telefon oder Zuruf kommen, trägt die Verwaltung ein. Am Posten steht dann, wer den Eintrag vorgenommen hat.",
+      "Auf einen bereits gespielten Spieltag lässt sich niemand mehr eintragen."
+    ]
+  },
+  {
+    title: "Übersicht und Aushang",
+    items: [
+      "Am Rechner zeigt ein Gitter alle kommenden Spieltage nebeneinander — dort ist auf einen Blick zu sehen, welcher Posten über mehrere Spieltage hinweg leer bleibt.",
+      "Am Handy wird daraus eine Liste aus Spieltags-Karten mit den Posten untereinander, damit sich niemand quer über eine Tabelle schieben muss.",
+      "Zu jedem Spieltag lässt sich ein Aushang drucken: alle Posten mit Namen und ausgerechneter Uhrzeit, freie Plätze ausdrücklich als frei — für das Kassenhäuschen oder das Schwarze Brett."
+    ]
+  },
+  {
+    title: "Nachricht aufs Handy",
+    items: [
+      "Sieben Tage vor dem Spieltag meldet sich die App bei allen, die helfen dürfen und noch keinen Posten haben — aber nur, wenn tatsächlich noch etwas frei ist.",
+      "Am Vortag bekommt jeder Eingetragene seine eigene Erinnerung mit Posten und Uhrzeit.",
+      "Die Verwaltung bekommt zur selben Frist eine Lagemeldung: was noch frei ist — und wenn alles besetzt ist, ausdrücklich auch das.",
+      "Die Frist ist einstellbar, jede Nachricht einzeln abschaltbar, der Aufruf an die offenen Posten zusätzlich von Hand auslösbar. Eingeschaltet wird das in der Tools-Übersicht unter „Mein Konto“."
+    ]
+  },
+  {
+    title: "Wer was darf",
+    items: [
+      "Sehen: alle Spieltage, alle Posten und wer eingetragen ist.",
+      "Bearbeiten: sich selbst ein- und austragen.",
+      "Administrieren: Spieltage und Job-Katalog pflegen, andere eintragen, Erinnerungen einstellen und auslösen und die Auswertung einsehen.",
+      "Wie oft jemand geholfen hat, sieht ausschließlich die Verwaltung. Eine offene Rangliste würde aus Freiwilligkeit einen Wettbewerb machen."
+    ]
+  },
+  {
+    title: "Daten und Speicherung",
+    items: [
+      "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht; ein eigenes Passwort braucht es nicht.",
+      "Fällt die Anmeldung weg, während die App offen ist, wird der Bildschirm geräumt — samt Posten-Dialog, Spieltag-Dialog und Aushang zum Drucken. Es bleibt kein Helfername im Browser zurück."
+    ]
+  }
+];
+
 const APP_CHANGELOG = [
+  {
+    version: "1.2",
+    groups: [
+      {
+        title: "Im Info-Reiter steht jetzt, was die App kann",
+        items: [
+          "Die Liste der Änderungen und die Versionsnummer sind aus dem Info-Reiter verschwunden.",
+          "Stattdessen steht dort die Karte „Funktionen“: was die Spieltagscrew kann, nach Themen geordnet.",
+          "Was sich geändert hat, steht weiterhin in den Neuigkeiten auf der Startseite der Tools-Übersicht."
+        ]
+      }
+    ]
+  },
   {
     version: "1.1",
     groups: [
